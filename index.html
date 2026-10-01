@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Andrea Bocanegra — Clínica de Podología en Gijón</title>
+<meta name="description" content="Andrea Bocanegra, Clínica de Podología en el Centro de Gijón. Quiropodia, estudio biomecánico, plantillas a medida y podología deportiva. Pide cita por WhatsApp.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23F3EDE4'/%3E%3Ctext x='50' y='67' font-family='Georgia,serif' font-weight='700' font-size='52' text-anchor='middle' fill='%231B2A3A'%3EAB%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<style>
+  :root{
+    --bg:#F3EDE4;
+    --bg-alt:#FBF8F2;
+    --navy:#1B2A3A;
+    --navy-soft:#2B3F53;
+    --navy-line:rgba(27,42,58,.14);
+    --gold:#B08D57;
+    --wood:#C9A574;
+    --text:#463F35;
+    --text-soft:#7A7266;
+    --white:#fff;
+    --green:#25D366;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{display:block;max-width:100%;}
+  a{text-decoration:none;color:inherit;}
+  ul{list-style:none;}
+  .container{max-width:1180px;margin:0 auto;padding:0 24px;}
+  h1,h2,h3{font-family:'Playfair Display',serif;line-height:1.15;color:var(--navy);}
+  .eyebrow{
+    font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--gold);font-weight:700;margin-bottom:12px;display:block;
+  }
+  .section-title{font-size:clamp(2rem,4.5vw,2.85rem);margin-bottom:16px;}
+  .section-sub{font-size:1.05rem;color:var(--text-soft);max-width:540px;line-height:1.65;}
+  .section-head{text-align:center;margin:0 auto 56px;max-width:640px;}
+  section{padding:104px 0;}
+  .alt-bg{background:var(--bg-alt);}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    padding:16px 32px;border-radius:100px;font-weight:700;font-size:.95rem;
+    cursor:pointer;border:2px solid transparent;
+    transition:transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease;
+    white-space:nowrap;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn svg{width:18px;height:18px;flex-shrink:0;}
+  .btn-solid{background:var(--navy);color:var(--white);}
+  .btn-solid:hover{box-shadow:0 14px 30px rgba(27,42,58,.28);}
+  .btn-outline-dark{background:transparent;color:var(--navy);border-color:var(--navy);}
+  .btn-outline-dark:hover{background:var(--navy);color:var(--white);}
+  .btn-outline-light{background:transparent;color:var(--white);border-color:rgba(255,255,255,.7);}
+  .btn-outline-light:hover{background:rgba(255,255,255,.14);}
+  .btn-whatsapp{background:var(--green);color:var(--white);}
+  .btn-whatsapp:hover{box-shadow:0 14px 30px rgba(37,211,102,.35);}
+
+  /* ===== AB MONOGRAM ===== */
+  .ab-mark{position:relative;display:inline-block;width:1.55em;height:1.05em;flex-shrink:0;}
+  .ab-mark span{position:absolute;top:0;left:0;font-family:'Playfair Display',serif;font-weight:700;font-size:1em;line-height:1;}
+  .ab-mark .a{color:var(--navy);z-index:2;}
+  .ab-mark .b{color:transparent;-webkit-text-stroke:1.6px var(--navy);text-stroke:1.6px var(--navy);z-index:1;transform:translate(.58em,.14em);}
+  .logo-badge{
+    display:flex;align-items:center;justify-content:center;
+    border-radius:50%;border:1.5px solid var(--navy);
+    background:var(--bg-alt);flex-shrink:0;
+  }
+  .logo-badge--nav{width:46px;height:46px;}
+  .logo-badge--nav .ab-mark{font-size:19px;}
+  .logo-badge--footer{width:54px;height:54px;margin:0 auto 16px;}
+  .logo-badge--footer .ab-mark{font-size:22px;}
+  .hero-mark{width:118px;height:82px;margin:0 auto 22px;}
+  .hero-mark .ab-mark{font-size:76px;}
+  .hero-mark .ab-mark .a{color:var(--white);}
+  .hero-mark .ab-mark .b{-webkit-text-stroke:1.8px var(--white);text-stroke:1.8px var(--white);}
+
+  /* ===== NAVBAR ===== */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:1000;padding:16px 0;
+    transition:background .35s ease, box-shadow .35s ease, padding .35s ease;
+  }
+  header.scrolled{
+    background:rgba(243,237,228,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    box-shadow:0 4px 22px rgba(27,42,58,.1);padding:11px 0;
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;}
+  .nav-brand{display:flex;align-items:center;gap:12px;}
+  .nav-brand-text{display:flex;flex-direction:column;line-height:1.15;}
+  .nav-brand-text b{font-family:'Playfair Display',serif;font-weight:600;font-size:1.02rem;color:var(--navy);}
+  .nav-brand-text small{font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:700;}
+  .nav-links{display:flex;gap:34px;align-items:center;}
+  .nav-links a{font-weight:600;font-size:.9rem;color:var(--navy);position:relative;transition:color .3s ease;}
+  .nav-links a::after{
+    content:'';position:absolute;left:0;bottom:-4px;width:0;height:2px;background:var(--gold);
+    transition:width .3s ease;
+  }
+  .nav-links a:hover::after{width:100%;}
+  .nav-cta{background:var(--navy);color:var(--white)!important;padding:11px 22px;border-radius:100px;font-size:.85rem!important;}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:1100;background:none;border:none;}
+  .burger span{width:26px;height:2px;background:var(--navy);transition:all .3s ease;}
+
+  .mobile-menu{
+    position:fixed;top:0;right:0;width:78%;max-width:340px;height:100vh;
+    background:var(--bg-alt);box-shadow:-10px 0 40px rgba(0,0,0,.15);
+    transform:translateX(100%);transition:transform .4s cubic-bezier(.7,0,.2,1);
+    z-index:1050;display:flex;flex-direction:column;justify-content:center;padding:40px;gap:26px;
+  }
+  .mobile-menu.open{transform:translateX(0);}
+  .mobile-menu a{font-family:'Playfair Display',serif;font-size:1.55rem;color:var(--navy);font-weight:600;}
+  .menu-overlay{
+    position:fixed;inset:0;background:rgba(27,42,58,.4);z-index:1040;
+    opacity:0;pointer-events:none;transition:opacity .35s ease;
+  }
+  .menu-overlay.open{opacity:1;pointer-events:all;}
+
+  /* ===== HERO ===== */
+  .hero{
+    min-height:100vh;display:flex;align-items:center;justify-content:center;
+    position:relative;text-align:center;padding:150px 24px 90px;overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute;inset:0;
+    background-image:url('https://images.unsplash.com/photo-1763873993447-1d0be71a96d9?auto=format&fit=crop&w=2000&q=80');
+    background-size:cover;background-position:center;transform:scale(1.08);
+  }
+  .hero-overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(27,42,58,.74), rgba(27,42,58,.8) 55%, rgba(27,42,58,.92));
+  }
+  .hero-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;max-width:820px;margin:0 auto;}
+  .hero-eyebrow{
+    color:rgba(255,255,255,.8);letter-spacing:.24em;text-transform:uppercase;
+    font-size:.8rem;font-weight:700;margin-bottom:26px;
+  }
+  .hero-name{
+    font-family:'Playfair Display',serif;font-weight:600;color:#fff;
+    font-size:clamp(2.1rem,5.5vw,3.4rem);margin-bottom:8px;
+  }
+  .hero-sub{
+    color:var(--wood);font-size:.95rem;letter-spacing:.1em;text-transform:uppercase;
+    font-weight:600;margin-bottom:30px;
+  }
+  .hero-phrase{
+    font-family:'Playfair Display',serif;font-style:italic;font-weight:500;color:#fff;
+    font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.3;margin-bottom:40px;max-width:640px;
+  }
+  .hero-ctas{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;}
+
+  /* ===== RESEÑAS ===== */
+  .rating-line{
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    margin:0 auto 50px;flex-wrap:wrap;
+  }
+  .stars{color:var(--gold);font-size:1.2rem;letter-spacing:2px;}
+  .rating-text{font-size:.92rem;color:var(--text-soft);font-weight:600;}
+  .reviews-wrap{position:relative;}
+  .reviews-track{
+    display:flex;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;
+    padding:6px 4px 20px;scrollbar-width:thin;
+  }
+  .reviews-track::-webkit-scrollbar{height:6px;}
+  .reviews-track::-webkit-scrollbar-thumb{background:var(--navy-line);border-radius:10px;}
+  .review-card{
+    scroll-snap-align:start;flex:0 0 clamp(270px,80vw,360px);
+    background:var(--white);border-radius:18px;padding:30px 26px;
+    box-shadow:0 18px 40px -22px rgba(27,42,58,.25);border:1px solid var(--navy-line);
+    display:flex;flex-direction:column;gap:16px;
+  }
+  .review-top{display:flex;align-items:center;gap:12px;}
+  .review-avatar{
+    width:44px;height:44px;border-radius:50%;background:var(--navy);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.95rem;
+    font-family:'Playfair Display',serif;flex-shrink:0;
+  }
+  .review-who b{display:block;font-size:.92rem;color:var(--navy);font-weight:700;}
+  .review-who span{font-size:.76rem;color:var(--text-soft);}
+  .review-stars{color:var(--gold);font-size:.9rem;letter-spacing:1.5px;}
+  .review-meta{display:flex;align-items:center;justify-content:space-between;}
+  .review-time{font-size:.76rem;color:var(--text-soft);font-weight:600;}
+  .review-text{font-size:.94rem;line-height:1.68;color:var(--text);}
+  .google-chip{
+    display:inline-flex;align-items:center;gap:6px;font-size:.72rem;font-weight:700;
+    color:var(--text-soft);text-transform:uppercase;letter-spacing:.06em;
+  }
+  .reviews-arrows{display:flex;justify-content:center;gap:14px;margin-top:8px;}
+  .rev-arrow{
+    width:42px;height:42px;border-radius:50%;border:1.5px solid var(--navy);
+    background:transparent;display:flex;align-items:center;justify-content:center;
+    cursor:pointer;transition:background .25s ease,color .25s ease;color:var(--navy);
+  }
+  .rev-arrow:hover{background:var(--navy);color:#fff;}
+
+  /* ===== SERVICIOS ===== */
+  .pending-flag{
+    display:inline-block;margin:0 auto 40px;padding:9px 18px;border-radius:100px;
+    background:#FBF3E3;border:1px solid #ecd9ae;color:#8a6a2c;font-size:.78rem;
+    font-weight:700;letter-spacing:.03em;
+  }
+  .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;}
+  .service-card{
+    background:var(--white);border-radius:16px;padding:36px 30px;
+    border:1px solid var(--navy-line);transition:transform .35s ease, box-shadow .35s ease;
+  }
+  .service-card:hover{transform:translateY(-6px);box-shadow:0 24px 46px -26px rgba(27,42,58,.3);}
+  .service-num{
+    font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;
+    color:transparent;-webkit-text-stroke:1.3px var(--gold);text-stroke:1.3px var(--gold);
+    margin-bottom:18px;display:block;
+  }
+  .service-card h3{font-size:1.18rem;margin-bottom:10px;}
+  .service-card p{font-size:.9rem;line-height:1.6;color:var(--text-soft);}
+
+  /* ===== SOBRE ANDREA ===== */
+  .about{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;}
+  .about-img-wrap{border-radius:20px;overflow:hidden;box-shadow:0 30px 60px -20px rgba(27,42,58,.35);}
+  .about-img-wrap img{width:100%;height:520px;object-fit:cover;transition:transform .6s ease;}
+  .about-img-wrap:hover img{transform:scale(1.06);}
+  .about-text h2{font-size:clamp(1.9rem,3.6vw,2.5rem);margin-bottom:6px;}
+  .about-role{color:var(--gold);font-weight:700;font-size:.86rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:22px;display:block;}
+  .about-text p{font-size:1.02rem;line-height:1.78;color:var(--text);margin-bottom:20px;}
+  .about-note{
+    display:flex;gap:12px;background:var(--bg-alt);border:1px solid var(--navy-line);
+    border-radius:14px;padding:16px 18px;font-size:.84rem;color:var(--text-soft);align-items:flex-start;
+  }
+  .about-note svg{width:18px;height:18px;flex-shrink:0;color:var(--gold);margin-top:2px;}
+
+  /* ===== UBICACIÓN ===== */
+  .location{display:grid;grid-template-columns:1.1fr 1fr;gap:60px;align-items:stretch;}
+  .location-info{
+    background:var(--white);border:1px solid var(--navy-line);border-radius:20px;
+    padding:44px 40px;display:flex;flex-direction:column;gap:26px;justify-content:center;
+  }
+  .info-row{display:flex;gap:16px;align-items:flex-start;}
+  .info-row svg{width:22px;height:22px;flex-shrink:0;color:var(--gold);margin-top:2px;}
+  .info-row h4{font-size:1rem;color:var(--navy);margin-bottom:4px;font-family:'Inter',sans-serif;font-weight:700;}
+  .info-row p{font-size:.92rem;color:var(--text-soft);line-height:1.6;}
+  .schedule-table{display:flex;flex-direction:column;gap:6px;margin-top:2px;}
+  .schedule-row{display:flex;justify-content:space-between;gap:18px;font-size:.88rem;color:var(--text-soft);}
+  .schedule-row b{color:var(--navy);font-weight:600;flex-shrink:0;}
+  .schedule-row.closed{opacity:.65;}
+  .location-img{border-radius:20px;overflow:hidden;min-height:320px;box-shadow:0 30px 60px -20px rgba(27,42,58,.3);}
+  .location-img img{width:100%;height:100%;object-fit:cover;}
+
+  /* ===== CTA FINAL ===== */
+  .final-cta{
+    position:relative;text-align:center;overflow:hidden;padding:120px 24px;
+  }
+  .final-cta-bg{
+    position:absolute;inset:0;
+    background-image:url('https://images.unsplash.com/photo-1781513144825-aa1e284c5950?auto=format&fit=crop&w=2000&q=80');
+    background-size:cover;background-position:center;
+  }
+  .final-cta-overlay{position:absolute;inset:0;background:linear-gradient(180deg, rgba(27,42,58,.88), rgba(27,42,58,.88));}
+  .final-cta-content{position:relative;z-index:2;max-width:680px;margin:0 auto;}
+  .final-cta h2{color:#fff;font-size:clamp(2rem,4.5vw,2.8rem);margin-bottom:18px;}
+  .final-cta p{color:rgba(255,255,255,.78);font-size:1.05rem;margin-bottom:38px;line-height:1.6;}
+  .final-cta .hero-ctas{justify-content:center;}
+
+  /* ===== FOOTER ===== */
+  footer{background:var(--navy-soft);color:rgba(255,255,255,.85);padding:64px 0 30px;}
+  .footer-inner{text-align:center;max-width:520px;margin:0 auto;}
+  .footer-inner b{font-family:'Playfair Display',serif;font-size:1.2rem;color:#fff;display:block;margin-bottom:6px;}
+  .footer-inner .foot-tagline{font-size:.82rem;color:var(--wood);letter-spacing:.08em;text-transform:uppercase;margin-bottom:26px;display:block;}
+  .footer-info{display:flex;flex-direction:column;gap:10px;font-size:.9rem;margin-bottom:30px;}
+  .footer-info a{transition:color .25s ease;}
+  .footer-info a:hover{color:var(--wood);}
+  .footer-social{display:inline-flex;align-items:center;gap:8px;justify-content:center;}
+  .footer-social svg{width:16px;height:16px;}
+  .footer-divider{height:1px;background:rgba(255,255,255,.14);margin:26px 0;}
+  .footer-bottom{font-size:.78rem;color:rgba(255,255,255,.5);display:flex;flex-direction:column;gap:6px;}
+
+  /* ===== FLOATING BUTTONS ===== */
+  .fabs{position:fixed;right:22px;bottom:22px;display:flex;flex-direction:column;gap:14px;z-index:900;}
+  .fab{
+    width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 10px 26px rgba(0,0,0,.25);color:#fff;
+  }
+  .fab svg{width:27px;height:27px;}
+  .fab-whatsapp{background:var(--green);animation:fabPulseGreen 18s ease-in-out infinite;}
+  .fab-call{background:var(--navy);animation:fabPulseNavy 18s ease-in-out infinite;animation-delay:6s;}
+  @keyframes fabPulseGreen{
+    0%,4%,100%{box-shadow:0 10px 26px rgba(0,0,0,.25),0 0 0 0 rgba(37,211,102,0);}
+    1.5%{box-shadow:0 10px 26px rgba(0,0,0,.25),0 0 0 0 rgba(37,211,102,.55);}
+    3%{box-shadow:0 10px 26px rgba(0,0,0,.25),0 0 0 16px rgba(37,211,102,0);}
+  }
+  @keyframes fabPulseNavy{
+    0%,4%,100%{box-shadow:0 10px 26px rgba(0,0,0,.25),0 0 0 0 rgba(27,42,58,0);}
+    1.5%{box-shadow:0 10px 26px rgba(0,0,0,.25),0 0 0 0 rgba(27,42,58,.45);}
+    3%{box-shadow:0 10px 26px rgba(0,0,0,.25),0 0 0 16px rgba(27,42,58,0);}
+  }
+
+  /* ===== REVEAL ===== */
+  .reveal{opacity:0;transform:translateY(36px);}
+
+  /* ===== RESPONSIVE ===== */
+  @media(max-width:980px){
+    .nav-links{display:none;}
+    .burger{display:flex;}
+    .about,.location{grid-template-columns:1fr;}
+    .about-img-wrap{order:-1;}
+    .about-img-wrap img{height:340px;}
+    .services-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media(max-width:640px){
+    section{padding:76px 0;}
+    .services-grid{grid-template-columns:1fr;}
+    .hero{padding:130px 20px 70px;}
+    .location-info{padding:32px 26px;}
+    .final-cta{padding:90px 20px;}
+    .fabs{right:16px;bottom:16px;}
+    .fab{width:52px;height:52px;}
+    .fab svg{width:24px;height:24px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<header id="header">
+  <div class="container nav-inner">
+    <a href="#inicio" class="nav-brand">
+      <div class="logo-badge logo-badge--nav">
+        <div class="ab-mark"><span class="a">A</span><span class="b">B</span></div>
+      </div>
+      <div class="nav-brand-text">
+        <b>AB Podología</b>
+        <small>Gijón</small>
+      </div>
+    </a>
+    <nav class="nav-links">
+      <a href="#inicio">Inicio</a>
+      <a href="#sobre-andrea">Sobre Andrea</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#resenas">Reseñas</a>
+      <a href="#ubicacion">Ubicación</a>
+      <a href="https://wa.me/34614403490" class="nav-cta">Pedir cita</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="menu-overlay" id="menuOverlay"></div>
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="#inicio">Inicio</a>
+  <a href="#sobre-andrea">Sobre Andrea</a>
+  <a href="#servicios">Servicios</a>
+  <a href="#resenas">Reseñas</a>
+  <a href="#ubicacion">Ubicación</a>
+  <a href="https://wa.me/34614403490">Pedir cita</a>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="inicio">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-mark"><div class="ab-mark"><span class="a">A</span><span class="b">B</span></div></div>
+    <span class="hero-eyebrow">Podología en Gijón</span>
+    <h1 class="hero-name">Andrea Bocanegra</h1>
+    <span class="hero-sub">Clínica de Podología</span>
+    <p class="hero-phrase">Cuidado experto de tus pies en el corazón de Gijón</p>
+    <div class="hero-ctas">
+      <a href="https://wa.me/34614403490?text=Hola%20Andrea%2C%20me%20gustar%C3%ADa%20pedir%20cita%20en%20la%20cl%C3%ADnica" class="btn btn-whatsapp" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4a7.94 7.94 0 0 0-6.9 11.9L4 20l4.2-1.1a7.9 7.9 0 0 0 3.85 1h0a7.94 7.94 0 0 0 5.55-13.58ZM12.05 18.5a6.55 6.55 0 0 1-3.36-.92l-.24-.14-2.5.65.67-2.44-.16-.25a6.58 6.58 0 1 1 5.6 3.1Zm3.6-4.93c-.2-.1-1.17-.58-1.35-.64s-.32-.1-.45.1-.5.64-.62.77-.23.15-.43.05a5.4 5.4 0 0 1-1.59-.98 6 6 0 0 1-1.1-1.37c-.12-.2 0-.3.09-.4s.2-.23.3-.35.13-.2.2-.33a.36.36 0 0 0 0-.35c-.05-.1-.45-1.08-.62-1.48s-.33-.33-.45-.34h-.39a.74.74 0 0 0-.53.25 2.24 2.24 0 0 0-.7 1.67 3.9 3.9 0 0 0 .82 2.06 8.9 8.9 0 0 0 3.4 3 9.83 9.83 0 0 0 1.13.42 2.7 2.7 0 0 0 1.24.08 2.03 2.03 0 0 0 1.33-.94 1.65 1.65 0 0 0 .11-.94c-.05-.09-.17-.14-.36-.24Z"/></svg>
+        WhatsApp
+      </a>
+      <a href="tel:+34614403490" class="btn btn-outline-light">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Llamar ahora
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SOBRE ANDREA ===== -->
+<!-- PENDIENTE: ajustar texto biográfico con Andrea (formación, años de trayectoria) -->
+<section id="sobre-andrea">
+  <div class="container about">
+    <div class="about-img-wrap reveal">
+      <img src="https://images.unsplash.com/photo-1665231795856-769fb08a90bc?auto=format&fit=crop&w=1200&q=80" alt="Sala de tratamiento cálida y boutique">
+    </div>
+    <div class="about-text reveal">
+      <span class="about-role">Podóloga · Propietaria</span>
+      <h2>Sobre Andrea</h2>
+      <p>Andrea Bocanegra atiende cada consulta con la misma dedicación: escuchar primero, tratar con precisión después. Su clínica en pleno Centro de Gijón se ha convertido en un referente de confianza para quienes buscan un cuidado cercano y profesional de sus pies.</p>
+      <p>Lo que más repiten sus pacientes no es solo el resultado del tratamiento, sino cómo se sienten durante la visita: escuchadas, tranquilas y bien cuidadas de principio a fin.</p>
+      <div class="about-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        <span>Texto biográfico orientativo — pendiente de completar con Andrea (formación, especialización, trayectoria).</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICIOS ===== -->
+<!-- PENDIENTE: confirmar servicios reales ofrecidos -->
+<section id="servicios" class="alt-bg">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Tratamientos</span>
+      <h2 class="section-title">Servicios de la clínica</h2>
+      <p class="section-sub" style="margin:0 auto;">Selección orientativa de tratamientos habituales en una clínica de podología — a confirmar y ajustar con Andrea.</p>
+    </div>
+    <div style="text-align:center;">
+      <span class="pending-flag">Pendiente confirmar con Andrea</span>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <span class="service-num">01</span>
+        <h3>Quiropodia</h3>
+        <p>Tratamiento de callosidades, durezas y otras afecciones comunes de la piel del pie.</p>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-num">02</span>
+        <h3>Uña encarnada</h3>
+        <p>Tratamiento especializado y sin molestias de la onicocriptosis, con seguimiento personalizado.</p>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-num">03</span>
+        <h3>Estudio biomecánico de la pisada</h3>
+        <p>Análisis completo de la marcha para detectar el origen de molestias en pie, rodilla o espalda.</p>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-num">04</span>
+        <h3>Plantillas ortopédicas a medida</h3>
+        <p>Diseño y fabricación de plantillas personalizadas según el estudio de la pisada de cada paciente.</p>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-num">05</span>
+        <h3>Podología deportiva</h3>
+        <p>Prevención y tratamiento de lesiones del pie asociadas a la práctica deportiva.</p>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-num">06</span>
+        <h3>Pie diabético</h3>
+        <p>Cuidado preventivo y seguimiento especializado del pie en pacientes con diabetes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RESEÑAS ===== -->
+<section id="resenas">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Opiniones reales de Google</span>
+      <h2 class="section-title">Lo que dicen nuestras pacientes</h2>
+      <p class="section-sub" style="margin:0 auto;">La reputación de la clínica se ha construido paciente a paciente, sin publicidad — solo boca a boca.</p>
+    </div>
+    <div class="rating-line reveal">
+      <span class="stars">★★★★★</span>
+      <span class="rating-text">Basado en 18 reseñas de Google — excelente valoración</span>
+    </div>
+
+    <div class="reviews-wrap reveal">
+      <div class="reviews-track" id="reviewsTrack">
+
+        <div class="review-card">
+          <div class="review-top">
+            <div class="review-avatar">RS</div>
+            <div class="review-who">
+              <b>Rosa María Serrano García</b>
+              <span>Local Guide · 28 reseñas · 12 fotos</span>
+            </div>
+          </div>
+          <div class="review-meta">
+            <span class="review-stars">★★★★★</span>
+            <span class="review-time">Hace 5 meses</span>
+          </div>
+          <p class="review-text">"Mi experiencia con la podóloga Andrea Bocanegra, fue más qué satisfactoria!! Me desplazo en silla de ruedas, iba nerviosa ante la novedad y la situación....y Andrea me relajó nada más llegar. Dejé mis pies, en sus manos, y fue un gran acierto. Profesionalidad, empatía, simpatía....todo unido hacen qué salgas de maravilla!! La recomiendo mil por mil. Gracias por TODO, hasta la próxima 👏👏👏👏👏"</p>
+          <span class="google-chip">Reseña de Google</span>
+        </div>
+
+        <div class="review-card">
+          <div class="review-top">
+            <div class="review-avatar">MS</div>
+            <div class="review-who">
+              <b>María Sánchez Condado</b>
+              <span>9 reseñas · 3 fotos</span>
+            </div>
+          </div>
+          <div class="review-meta">
+            <span class="review-stars">★★★★★</span>
+            <span class="review-time">Hace 2 meses</span>
+          </div>
+          <p class="review-text">"Mi experiencia ha sido perfecta. Andrea me ha tratado de maravilla, me ha aconsejado y ha explicado todo con claridad. 100% recomendable."</p>
+          <span class="google-chip">Reseña de Google</span>
+        </div>
+
+        <div class="review-card">
+          <div class="review-top">
+            <div class="review-avatar">S</div>
+            <div class="review-who">
+              <b>Sara</b>
+              <span>10 reseñas</span>
+            </div>
+          </div>
+          <div class="review-meta">
+            <span class="review-stars">★★★★★</span>
+            <span class="review-time">Hace 5 meses</span>
+          </div>
+          <p class="review-text">"Excelente experiencia en esta clínica. Ya de por si es incómodo ir al podólogo. Pero Andrea lo hace con un mimo increíble. Cero dolor. Sin duda volveré."</p>
+          <span class="google-chip">Reseña de Google</span>
+        </div>
+
+        <div class="review-card">
+          <div class="review-top">
+            <div class="review-avatar">GA</div>
+            <div class="review-who">
+              <b>Graciela Antuña Palacio</b>
+              <span>2 reseñas · 1 foto</span>
+            </div>
+          </div>
+          <div class="review-meta">
+            <span class="review-stars">★★★★★</span>
+            <span class="review-time">Hace 4 meses</span>
+          </div>
+          <p class="review-text">"Andrea es una profesional como la copa de un pino, clínica guapísima y la tranquilidad que aporta, llevo mucho tiempo con ella y no importa desplazarse a Gijón merece la pena, gran profesional"</p>
+          <span class="google-chip">Reseña de Google</span>
+        </div>
+
+        <div class="review-card">
+          <div class="review-top">
+            <div class="review-avatar">JC</div>
+            <div class="review-who">
+              <b>Jose Cagide Abonjo</b>
+              <span>1 reseña</span>
+            </div>
+          </div>
+          <div class="review-meta">
+            <span class="review-stars">★★★★★</span>
+            <span class="review-time">Hace 6 meses</span>
+          </div>
+          <p class="review-text">"Fui hace un mes por un problema en los pies, me hizo un estudio de la pisada y me recomendó unas plantillas echas en la clínica.....la verdad que pensé salir flotando con esas plantillas pero no, SALI VOLANDO....un diez para la podóloga....."</p>
+          <span class="google-chip">Reseña de Google</span>
+        </div>
+
+      </div>
+      <div class="reviews-arrows">
+        <button class="rev-arrow" id="revPrev" aria-label="Anterior">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="rev-arrow" id="revNext" aria-label="Siguiente">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== UBICACIÓN Y HORARIO ===== -->
+<section id="ubicacion" class="alt-bg">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Visítanos</span>
+      <h2 class="section-title">Ubicación y horario</h2>
+      <p class="section-sub" style="margin:0 auto;">En pleno Centro de Gijón, a un paseo del Molinón y de la playa de San Lorenzo.</p>
+    </div>
+    <div class="location">
+      <div class="location-info reveal">
+        <div class="info-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <div>
+            <h4>Dirección</h4>
+            <p>C. Río de Oro, 20, bajo izquierda<br>Centro, 33209 Gijón, Asturias</p>
+          </div>
+        </div>
+        <div class="info-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <div>
+            <h4>Horario</h4>
+            <div class="schedule-table">
+              <div class="schedule-row"><b>Lunes</b><span>9:30–13:30 y 16:00–19:30</span></div>
+              <div class="schedule-row"><b>Martes</b><span>9:30–13:30</span></div>
+              <div class="schedule-row"><b>Miércoles</b><span>9:30–13:30 y 16:00–19:30</span></div>
+              <div class="schedule-row"><b>Jueves</b><span>9:30–13:30 y 16:00–19:30</span></div>
+              <div class="schedule-row"><b>Viernes</b><span>9:30–15:00</span></div>
+              <div class="schedule-row closed"><b>Sábado</b><span>Cerrado</span></div>
+              <div class="schedule-row closed"><b>Domingo</b><span>Cerrado</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="info-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <div>
+            <h4>Teléfono</h4>
+            <p><a href="tel:+34614403490">614 403 490</a></p>
+          </div>
+        </div>
+        <div class="hero-ctas" style="justify-content:flex-start;">
+          <a href="https://www.google.com/maps/search/?api=1&query=Andrea%20Bocanegra%20Podolog%C3%ADa%2C%20Calle%20R%C3%ADo%20de%20Oro%2020%2C%20Gij%C3%B3n" target="_blank" rel="noopener" class="btn btn-outline-dark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+            Cómo llegar
+          </a>
+        </div>
+      </div>
+      <div class="location-img reveal">
+        <img src="https://images.unsplash.com/photo-1693578538512-fc66f318c833?auto=format&fit=crop&w=1200&q=80" alt="Sala de espera cálida y boutique de la clínica">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA FINAL ===== -->
+<section class="final-cta">
+  <div class="final-cta-bg"></div>
+  <div class="final-cta-overlay"></div>
+  <div class="final-cta-content">
+    <h2>Reserva tu cita hoy</h2>
+    <p>Escríbenos por WhatsApp o llama directamente — Andrea te atenderá con la misma cercanía que describen sus pacientes.</p>
+    <div class="hero-ctas">
+      <a href="https://wa.me/34614403490?text=Hola%20Andrea%2C%20me%20gustar%C3%ADa%20pedir%20cita%20en%20la%20cl%C3%ADnica" class="btn btn-whatsapp" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4a7.94 7.94 0 0 0-6.9 11.9L4 20l4.2-1.1a7.9 7.9 0 0 0 3.85 1h0a7.94 7.94 0 0 0 5.55-13.58ZM12.05 18.5a6.55 6.55 0 0 1-3.36-.92l-.24-.14-2.5.65.67-2.44-.16-.25a6.58 6.58 0 1 1 5.6 3.1Zm3.6-4.93c-.2-.1-1.17-.58-1.35-.64s-.32-.1-.45.1-.5.64-.62.77-.23.15-.43.05a5.4 5.4 0 0 1-1.59-.98 6 6 0 0 1-1.1-1.37c-.12-.2 0-.3.09-.4s.2-.23.3-.35.13-.2.2-.33a.36.36 0 0 0 0-.35c-.05-.1-.45-1.08-.62-1.48s-.33-.33-.45-.34h-.39a.74.74 0 0 0-.53.25 2.24 2.24 0 0 0-.7 1.67 3.9 3.9 0 0 0 .82 2.06 8.9 8.9 0 0 0 3.4 3 9.83 9.83 0 0 0 1.13.42 2.7 2.7 0 0 0 1.24.08 2.03 2.03 0 0 0 1.33-.94 1.65 1.65 0 0 0 .11-.94c-.05-.09-.17-.14-.36-.24Z"/></svg>
+        WhatsApp
+      </a>
+      <a href="tel:+34614403490" class="btn btn-outline-light">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        614 403 490
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container footer-inner">
+    <div class="logo-badge logo-badge--footer">
+      <div class="ab-mark"><span class="a">A</span><span class="b">B</span></div>
+    </div>
+    <b>AB Podología</b>
+    <span class="foot-tagline">Andrea Bocanegra — Clínica de Podología</span>
+    <div class="footer-info">
+      <span>C. Río de Oro, 20, bajo izquierda · Centro, 33209 Gijón</span>
+      <a href="tel:+34614403490">614 403 490</a>
+      <a href="https://www.instagram.com/clinicapodologiaab/" target="_blank" rel="noopener" class="footer-social">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        @clinicapodologiaab
+      </a>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <span>© 2026 Andrea Bocanegra — Clínica de Podología. Todos los derechos reservados.</span>
+      <span>Demo web creada por Baxia Agency</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== FLOATING BUTTONS ===== -->
+<div class="fabs">
+  <a href="https://wa.me/34614403490?text=Hola%20Andrea%2C%20me%20gustar%C3%ADa%20pedir%20cita%20en%20la%20cl%C3%ADnica" target="_blank" rel="noopener" class="fab fab-whatsapp" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4a7.94 7.94 0 0 0-6.9 11.9L4 20l4.2-1.1a7.9 7.9 0 0 0 3.85 1h0a7.94 7.94 0 0 0 5.55-13.58ZM12.05 18.5a6.55 6.55 0 0 1-3.36-.92l-.24-.14-2.5.65.67-2.44-.16-.25a6.58 6.58 0 1 1 5.6 3.1Zm3.6-4.93c-.2-.1-1.17-.58-1.35-.64s-.32-.1-.45.1-.5.64-.62.77-.23.15-.43.05a5.4 5.4 0 0 1-1.59-.98 6 6 0 0 1-1.1-1.37c-.12-.2 0-.3.09-.4s.2-.23.3-.35.13-.2.2-.33a.36.36 0 0 0 0-.35c-.05-.1-.45-1.08-.62-1.48s-.33-.33-.45-.34h-.39a.74.74 0 0 0-.53.25 2.24 2.24 0 0 0-.7 1.67 3.9 3.9 0 0 0 .82 2.06 8.9 8.9 0 0 0 3.4 3 9.83 9.83 0 0 0 1.13.42 2.7 2.7 0 0 0 1.24.08 2.03 2.03 0 0 0 1.33-.94 1.65 1.65 0 0 0 .11-.94c-.05-.09-.17-.14-.36-.24Z"/></svg>
+  </a>
+  <a href="tel:+34614403490" class="fab fab-call" aria-label="Llamar">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+  </a>
+</div>
+
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Header scroll behaviour
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Mobile menu
+  const burger = document.getElementById('burger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const menuOverlay = document.getElementById('menuOverlay');
+  function toggleMenu(){
+    burger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+    menuOverlay.classList.toggle('open');
+  }
+  burger.addEventListener('click', toggleMenu);
+  menuOverlay.addEventListener('click', toggleMenu);
+  document.querySelectorAll('.mobile-menu a').forEach(a => a.addEventListener('click', toggleMenu));
+
+  // Reviews carousel arrows
+  const track = document.getElementById('reviewsTrack');
+  document.getElementById('revPrev').addEventListener('click', () => track.scrollBy({left:-380, behavior:'smooth'}));
+  document.getElementById('revNext').addEventListener('click', () => track.scrollBy({left:380, behavior:'smooth'}));
+
+  // Hero entrance
+  gsap.timeline({defaults:{ease:'power3.out'}})
+    .from('.hero-mark', {opacity:0, y:-20, duration:.9})
+    .from('.hero-eyebrow', {opacity:0, y:14, duration:.7}, '-=.5')
+    .from('.hero-name', {opacity:0, y:24, duration:.9}, '-=.4')
+    .from('.hero-sub', {opacity:0, y:14, duration:.7}, '-=.5')
+    .from('.hero-phrase', {opacity:0, y:20, duration:.9}, '-=.4')
+    .from('.hero-ctas .btn', {opacity:0, y:16, duration:.7, stagger:.12}, '-=.5');
+
+  // Scroll reveals
+  gsap.utils.toArray('.reveal').forEach(el => {
+    gsap.fromTo(el, {opacity:0, y:36}, {
+      opacity:1, y:0, duration:.9, ease:'power3.out',
+      scrollTrigger:{trigger:el, start:'top 85%'}
+    });
+  });
+
+  gsap.utils.toArray('.service-card').forEach((el,i) => {
+    gsap.fromTo(el, {opacity:0, y:30}, {
+      opacity:1, y:0, duration:.7, delay:i*0.05, ease:'power3.out',
+      scrollTrigger:{trigger:el, start:'top 90%'}
+    });
+  });
+
+</script>
+</body>
+</html>
